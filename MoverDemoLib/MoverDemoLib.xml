@@ -1,0 +1,17 @@
+<Library Name="MoverDemoLib">
+ <Models>
+  <Model Name="MoverDemoLib.Controller"/>
+  <Model Name="MoverDemoLib.FilterInfinity&lt;uint64_t&gt;"/>
+  <Model Name="MoverDemoLib.FilterInfinity&lt;char&gt;"/>
+  <Model Name="MoverDemoLib.FilterInfinity&lt;unsigned int&gt;"/>
+  <Model Name="MoverDemoLib.FilterInfinity&lt;unsigned short&gt;"/>
+  <Model Name="MoverDemoLib.FilterInfinity&lt;int64_t&gt;"/>
+  <Model Name="MoverDemoLib.FilterInfinity&lt;float&gt;"/>
+  <Model Name="MoverDemoLib.FilterInfinity&lt;double&gt;"/>
+  <Model Name="MoverDemoLib.FilterInfinity&lt;short&gt;"/>
+  <Model Name="MoverDemoLib.FilterInfinity&lt;int&gt;"/>
+  <Model Name="MoverDemoLib.FilterInfinity&lt;unsigned char&gt;"/>
+  <Model Name="MoverDemoLib.FilterInfinity&lt;bool&gt;"/>
+  <Model Name="MoverDemoLib.FilterInfinity"/>
+ </Models>
+</Library>

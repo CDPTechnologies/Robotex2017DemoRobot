@@ -1,0 +1,33 @@
+<Component Model='I2CIO.ADS1115IOServer' Name='ADS1115IOServer' src='Components/ADS1115IOServer.xml'  Description='Communicate with ADS1115 analog-to-digital converter over I2C bus'>
+  <EnableA3>0</EnableA3>
+  <EnableA2>1</EnableA2>
+  <EnableA1>1</EnableA1>
+  <EnableA0>1</EnableA0>
+  <EnableA2A3>0</EnableA2A3>
+  <EnableA1A3>0</EnableA1A3>
+  <EnableA0A3>0</EnableA0A3>
+  <EnableA0A1>0</EnableA0A1>
+  <DataRate>250SPS</DataRate>
+  <Gain>±2.048V</Gain>
+  <Debug>0</Debug>
+  <Adapter>/dev/i2c-1</Adapter>
+  <fs>100</fs>
+
+  <Signals>
+    <Signal Description='Process run time each s.' DisplayLevel='10' Input='0' Model='CDPSignal&lt;double&gt;' Name='Process Timer' Type='double' Unit='s/s'></Signal>
+    <Signal Description='Process interval [s].' DisplayLevel='10' Input='0' Model='CDPSignal&lt;double&gt;' Name='Process Period' Type='double' Unit='s'></Signal>
+    <Signal Description='Measures the voltage between A0 and A3' Input='0' Model='CDPSignal&lt;short&gt;' Name='A0A3' Type='short'></Signal>
+    <Signal Description='Measures the voltage between A1 and A3' Input='0' Model='CDPSignal&lt;short&gt;' Name='A1A3' Type='short'></Signal>
+    <Signal Description='Measures the voltage between A2 and A3' Input='0' Model='CDPSignal&lt;short&gt;' Name='A2A3' Type='short'></Signal>
+    <Signal Description='Measures the voltage between A0 and A1' Input='0' Model='CDPSignal&lt;short&gt;' Name='A0A1' Type='short'></Signal>
+    <Signal Description='Analog input value of the analog-to-digital converter' Input='0' Model='CDPSignal&lt;short&gt;' Name='A0' Type='short'></Signal>
+    <Signal Description='Analog input value of the analog-to-digital converter' Input='0' Model='CDPSignal&lt;short&gt;' Name='A1' Type='short'></Signal>
+    <Signal Description='Analog input value of the analog-to-digital converter' Input='0' Model='CDPSignal&lt;short&gt;' Name='A2' Type='short'></Signal>
+    <Signal Description='Analog input value of the analog-to-digital converter' Input='0' Model='CDPSignal&lt;short&gt;' Name='A3' Type='short'></Signal>
+  </Signals>
+
+  <Alarms>
+    <Alarm Description='A component was suspended!' DisplayLevel='10' Enabled='1' Level='Warning' Model='CDPAlarm' Name='Component Suspended' Text='Component was suspended!'></Alarm>
+    <Alarm Description='Error with I2C communication' Enabled='1' Level='Error' Name='TransmissionAlarm'></Alarm>
+  </Alarms>
+</Component>

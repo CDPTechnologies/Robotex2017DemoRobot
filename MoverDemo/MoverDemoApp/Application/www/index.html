@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale = 1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>My CDP Web App</title>
+  <link rel="stylesheet" href="semantic.min.css">
+  <link rel="stylesheet" href="app.css">
+</head>
+<body ng-app="myApp">
+
+<!--
+Web UI for MoverDemoApp.
+Based on: https://gitlab.com/karmo/angular-cdp-demo and Semantic UI (https://semantic-ui.com/).
+Documentation for angular-cdp: https://gitlab.com/karmo/angular-cdp/ (see README.md).
+Usage:
+    Deploy and Run application.
+    Look at Application Output and find something like "StudioAPIServer: listening on 127.0.0.1:7689".
+    Use you web browser and navigate to "127.0.0.1:7689/www/index.html" (or some other IP and port).
+-->
+
+<div id="content">
+
+  <h1>CDP demo application</h1>
+
+  <cdp-chart width="500" height="200" options='{
+        "maxValue": 50,
+        "minValue": 0,
+        "millisPerPixel": 20
+      }'>
+    <cdp-chart-line routing="MoverDemoApp.SensorLeft"></cdp-chart-line>
+    <cdp-chart-line routing="MoverDemoApp.SensorRight"></cdp-chart-line>
+    <cdp-chart-line routing="MoverDemoApp.SensorFront"></cdp-chart-line>
+  </cdp-chart>
+
+
+  <br>
+
+  <div class="ui label">
+    Current state:
+    <div class="detail"><cdp-label routing="MoverDemoApp.Controller.CurrentState" ></cdp-label></div>
+  </div>
+
+
+  <br><br>
+
+  <div class="ui small labeled input" style="width: 100px">
+    <div class="ui label">Base Speed</div>
+    <cdp-input type="number" routing="MoverDemoApp.Controller.BaseSpeed"></cdp-input>
+  </div>
+
+  <br><br>
+  <cdp-input type="range" min="0" max="100" routing="MoverDemoApp.Controller.BaseSpeed"></cdp-input>
+
+  <br><br>
+
+  <cdp-button routing="MoverDemoApp.GPIOServer.PowerButton" class="ui button primary">On/Off</cdp-button>
+  <cdp-button routing="MoverDemoApp.CM_SUSPEND" class="ui button negative">Kill</cdp-button>
+
+</div>
+
+
+  <script src="js/jquery.min.js"></script>
+  <script src="js/semantic.min.js"></script>
+  <script src="js/angular.min.js"></script>
+  <script src="js/angular-route.min.js"></script>
+  <script src="js/smoothie.min.js"></script>
+  <script src="js/gauge.min.js"></script>
+  <script src="js/long.min.js"></script>
+  <script src="js/bytebuffer.min.js"></script>
+  <script src="js/protobuf.min.js"></script>
+  <script src="js/angular-cdp.js"></script>
+  <script src="studioapi.js"></script>
+  <script src="app.js"></script>
+
+  <script>
+    // Uncomment following if web server is not on same PC as MoverDemoApp. Useful for development phase.
+    // ANGULAR_CDP_STUDIOAPI_URL = "192.168.0.77:7689";
+  </script>
+
+</body>
+</html>
