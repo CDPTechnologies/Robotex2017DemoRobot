@@ -6,5 +6,3 @@ The demo comes with an HTML interface showing the sensor measurement and turn ca
 
 The demo was created using [CDP Studio](http://cdpstudio.com/home-edition).
 Read more about it in [wiki](https://github.com/CDPTechnologies/Wall-Following-Robot-Car/wiki).
-
-Note: This demo project depends on CDP 4.4 pre-release. Final version will be available end of 2017.

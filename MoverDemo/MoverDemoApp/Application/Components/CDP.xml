@@ -11,11 +11,11 @@
     <Subcomponent Name="StudioAPIServer"    Model="StudioAPIServer"   src="Components\CDP\StudioAPIServer.xml"></Subcomponent>
   </Subcomponents>
   <Signals>
-    <Signal Name="Process Timer" Value="0.0" Unit="s/s" Type="double" Description="Process run time each s." DisplayLevel="10"  Model="CDPSignal&lt;double&gt;"></Signal>
-    <Signal Name="Process Period" Value="0.0" Unit="s" Type="double" Description="Process interval [s]." DisplayLevel="10"  Model="CDPSignal&lt;double&gt;"></Signal>
+    <Signal Name="Process Timer" Value="0.0" Unit="s/s" Type="double" Description="Process run time each s."  Model="CDPSignal&lt;double&gt;"></Signal>
+    <Signal Name="Process Period" Value="0.0" Unit="s" Type="double" Description="Process interval [s]."  Model="CDPSignal&lt;double&gt;"></Signal>
   </Signals>
   <Alarms>
-    <Alarm Name="Component Suspended" Level="Warning" Enabled="1" Text="Component 'CDP' was suspended!" Trig="0" Description="A component was suspended!" DisplayLevel="10"  Model="CDPAlarm"></Alarm>
+    <Alarm Name="Component Suspended" Level="Warning" Enabled="1" Text="Component 'CDP' was suspended!" Trig="0" Description="A component was suspended!"  Model="CDPAlarm"></Alarm>
   </Alarms>
 
 </Component>

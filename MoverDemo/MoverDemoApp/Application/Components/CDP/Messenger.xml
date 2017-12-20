@@ -5,8 +5,8 @@
   <fs>10</fs>
 
   <Signals>
-    <Signal Name="Process Timer" Value="0.0" Unit="s/s" Type="double" Description="Process run time each s." DisplayLevel="10"  Model="CDPSignal&lt;double&gt;"></Signal>
-    <Signal Name="Process Period" Value="0.0" Unit="s" Type="double" Description="Process interval [s]." DisplayLevel="10"  Model="CDPSignal&lt;double&gt;"></Signal>
+    <Signal Name="Process Timer" Value="0.0" Unit="s/s" Type="double" Description="Process run time each s."  Model="CDPSignal&lt;double&gt;"></Signal>
+    <Signal Name="Process Period" Value="0.0" Unit="s" Type="double" Description="Process interval [s]."  Model="CDPSignal&lt;double&gt;"></Signal>
 
     <Signal Name="TotalSendMessageRate"   Unit="1/s"    Value="0" Model="CDPSignal&lt;double&gt;" Type="double" Description="Total messages sent each s."></Signal>
     <Signal Name="UDPNetworkLoad"         Unit="kB/s"   Value="0" Model="CDPSignal&lt;double&gt;" Type="double" Description="Messenger network load, sum of in and out."></Signal>
@@ -22,12 +22,12 @@
  </Signals>
 
   <Parameters>
-    <Parameter Name="kMonitorFilter"        Unit="0..1"   Value="1"     DefaultValue="0.2"  PreviousValue="0.2" TimeLastChanged="0" Description="IIR filter constant 0..1 for monitor signal filtering. 1 == filter disabled."></Parameter>
-    <Parameter Name="Max retry count"       Unit="Count"  Value="3"     DefaultValue="3"    PreviousValue="3"   TimeLastChanged="0" Description="Maximum UDP send retry count for a message."></Parameter>
-    <Parameter Name="Network disabled"      Unit="Bool"   Value="0"     DefaultValue="0"    PreviousValue="0"   TimeLastChanged="0" Description="Set == 1 to disable messenger network send and isolate this application from the network."></Parameter>
+    <Parameter Name="kMonitorFilter"        Unit="0..1"   Value="1"      PreviousValue="0.2" TimeLastChanged="0" Description="IIR filter constant 0..1 for monitor signal filtering. 1 == filter disabled."></Parameter>
+    <Parameter Name="Max retry count"       Unit="Count"  Value="3"        PreviousValue="3"   TimeLastChanged="0" Description="Maximum UDP send retry count for a message."></Parameter>
+    <Parameter Name="Network disabled"      Unit="Bool"   Value="0"        PreviousValue="0"   TimeLastChanged="0" Description="Set == 1 to disable messenger network send and isolate this application from the network."></Parameter>
   </Parameters>
   <Alarms>
-    <Alarm Name="Component Suspended" Level="Warning" Enabled="1" Text="Component 'Messenger' was suspended!" Trig="0" Description="A component was suspended!" DisplayLevel="10"  Model="CDPAlarm"></Alarm>
+    <Alarm Name="Component Suspended" Level="Warning" Enabled="1" Text="Component 'Messenger' was suspended!" Trig="0" Description="A component was suspended!"  Model="CDPAlarm"></Alarm>
   </Alarms>
 
 </Component>

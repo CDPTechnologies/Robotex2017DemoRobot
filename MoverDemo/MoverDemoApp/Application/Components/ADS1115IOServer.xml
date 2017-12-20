@@ -14,8 +14,8 @@
   <fs>100</fs>
 
   <Signals>
-    <Signal Description='Process run time each s.' DisplayLevel='10' Input='0' Model='CDPSignal&lt;double&gt;' Name='Process Timer' Type='double' Unit='s/s'></Signal>
-    <Signal Description='Process interval [s].' DisplayLevel='10' Input='0' Model='CDPSignal&lt;double&gt;' Name='Process Period' Type='double' Unit='s'></Signal>
+    <Signal Description='Process run time each s.' Input='0' Model='CDPSignal&lt;double&gt;' Name='Process Timer' Type='double' Unit='s/s'></Signal>
+    <Signal Description='Process interval [s].' Input='0' Model='CDPSignal&lt;double&gt;' Name='Process Period' Type='double' Unit='s'></Signal>
     <Signal Description='Measures the voltage between A0 and A3' Input='0' Model='CDPSignal&lt;short&gt;' Name='A0A3' Type='short'></Signal>
     <Signal Description='Measures the voltage between A1 and A3' Input='0' Model='CDPSignal&lt;short&gt;' Name='A1A3' Type='short'></Signal>
     <Signal Description='Measures the voltage between A2 and A3' Input='0' Model='CDPSignal&lt;short&gt;' Name='A2A3' Type='short'></Signal>
@@ -27,7 +27,7 @@
   </Signals>
 
   <Alarms>
-    <Alarm Description='A component was suspended!' DisplayLevel='10' Enabled='1' Level='Warning' Model='CDPAlarm' Name='Component Suspended' Text='Component was suspended!'></Alarm>
+    <Alarm Description='A component was suspended!' Enabled='1' Level='Warning' Model='CDPAlarm' Name='Component Suspended' Text='Component was suspended!'></Alarm>
     <Alarm Description='Error with I2C communication' Enabled='1' Level='Error' Name='TransmissionAlarm'></Alarm>
   </Alarms>
 </Component>
