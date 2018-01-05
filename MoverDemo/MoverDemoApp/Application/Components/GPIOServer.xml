@@ -28,8 +28,8 @@ Input is a number between 0 and 100. Output is a pulsing bool signal.' Model='Au
       <Operator Description='Multiply signal with arguments operator' Model='Automation.MulOperator&lt;bool&gt;' Name='MulOperator' Type='bool'>
         <Argument Description='Multiplier' Model='Argument&lt;bool&gt;' Name='Argument' Type='bool' Value='0'  Routing='MoverDemoApp.GPIOServer.IsOn'></Argument></Operator></GPIOPin>
     <GPIOPin Input='1' Model='GPIOPinIO.GPIOPin' Name='MotorRight' Nr='7' Type='bool' Value='0'  Routing='.MotorRightPWM'  Description='Controls right motor'>
-      <Operator Description='Multiply signal with arguments operator' Model='Automation.MulOperator&lt;double&gt;' Name='MulOperator' Type='double'>
-        <Argument Description='Multiplier' Model='Argument&lt;double&gt;' Name='Argument' Type='double' Value='0'  Routing='MoverDemoApp.GPIOServer.IsOn'></Argument></Operator></GPIOPin>
+      <Operator Description='Multiply signal with arguments operator' Model='Automation.MulOperator&lt;bool&gt;' Name='MulOperator' Type='bool'>
+        <Argument Description='Multiplier' Model='Argument&lt;bool&gt;' Name='Argument' Type='bool' Value='0'  Routing='MoverDemoApp.GPIOServer.IsOn'></Argument></Operator></GPIOPin>
     <GPIOPin Input='0' Model='GPIOPinIO.GPIOPin' Name='PowerButton' Nr='9' Type='bool' Value='0'  Description='Button to enable motors'  InternalValue='0'  NetworkConvert='0'  RoutedProperties='Value'  Routing=''  RoutingStatus=''  Status='0'  Unit=''></GPIOPin>
     <GPIOPin Input='0' Model='GPIOPinIO.GPIOPin' Name='LightButton' Nr='10' Type='bool' Value='0'  Description=''  InternalValue='0'  NetworkConvert='0'  RoutedProperties='Value'  Routing=''  RoutingStatus=''  Status='0'  Unit=''></GPIOPin>
   </GPIOPins>
