@@ -9,11 +9,13 @@
     <Signal Description='Number of items working in ioserver.' Input='0' Model='CDPSignal&lt;unsigned int&gt;' Name='NumberOfNodesOnline' Type='unsigned int' Unit='count'></Signal>
     <Signal Description='Number of items total in ioserver.' Input='0' Model='CDPSignal&lt;unsigned int&gt;' Name='NumberOfNodes' Type='unsigned int' Unit='count'></Signal>
     <Signal Input='0' Model='CDPSignal&lt;double&gt;' Name='MotorLeftPWM' Type='double'  Routing='MoverDemoApp.Controller.MotorLeft'  Value='0'  Description='Converts motor speed to pulse width modulated bool signal'>
-      <Operator Description='Pulse-width modulation (PWM) is a modulation technique used to encode a message into a pulsing signal. Its main use is to allow the control of the power supplied to electrical devices, such as motors.
-Input is a number between 0 and 100. Output is a pulsing bool signal.' Model='Automation.PWMOperator' Name='PWMOperator' PWMResolution='30' Type='bool'  MaxInput='100'  MinInput="0"></Operator></Signal>
+      <Operator Description="Pulse-width modulation (PWM) is a modulation technique used to encode
+    a message into a pulsing signal. Its main use is to allow the control of the power supplied to electrical devices,
+    such as motors. Input is a number between MinInput and MaxInput properties. Output is a pulsing bool signal." MaxInput="100" MinInput="0" Model="Automation.PWMOperator" Name="PWMOperator" PWMResolution="20" Type="double"></Operator></Signal>
     <Signal Input='0' Model='CDPSignal&lt;double&gt;' Name='MotorRightPWM' Type='double'  Routing='MoverDemoApp.Controller.MotorRight'  Description='Converts motor speed to pulse width modulated bool signal'>
-      <Operator Description='Pulse-width modulation (PWM) is a modulation technique used to encode a message into a pulsing signal. Its main use is to allow the control of the power supplied to electrical devices, such as motors.
-Input is a number between 0 and 100. Output is a pulsing bool signal.' Model='Automation.PWMOperator' Name='PWMOperator' PWMResolution='30' Type='bool'  MaxInput='100'  MinInput="0"></Operator></Signal>
+      <Operator Description="Pulse-width modulation (PWM) is a modulation technique used to encode
+    a message into a pulsing signal. Its main use is to allow the control of the power supplied to electrical devices,
+    such as motors. Input is a number between MinInput and MaxInput properties. Output is a pulsing bool signal." MaxInput="100" MinInput="0" Model="Automation.PWMOperator" Name="PWMOperator" PWMResolution="20" Type="double"></Operator></Signal>
     <Signal Input='0' Model='CDPSignal&lt;bool&gt;' Name='IsOn' Type='bool'  Description='Are motors enabled'  InternalValue='0'  RoutedProperties='Value'  Routing='.PowerButton'  RoutingStatus=''  Status='0'  Unit=''  Value='0'>
       <Operator Description='Toggles signal value between true/false on the edge of the input signal.' Edge='RisingEdge' Model='Automation.ToggleOperator' Name='ToggleOperator' Type='bool'></Operator></Signal>
   </Signals>
