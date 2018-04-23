@@ -6,6 +6,8 @@
 #define MOVERDEMOLIB_CONTROLLER_H
 
 #include <CDPSystem/Base/CDPComponent.h>
+#include <CDPSystem/Base/CDPProperty.h>
+#include <Signal/CDPSignal.h>
 
 namespace MoverDemoLib {
 
@@ -52,6 +54,10 @@ protected:
   CDPProperty<double> DriveStraightSpeed;
   CDPProperty<double> TurnSpeed;
   CDPTimer m_transtitionToDriveTimer;
+  CDPProperty<bool> SmoothDrive;
+  CDPProperty<bool> MotorsOn;
+  CDPSignal<bool> PowerButtonPressed;
+  CDPSignal<bool> LightButtonPressed;
   using CDPComponent::ts;
   using CDPComponent::fs;
 };

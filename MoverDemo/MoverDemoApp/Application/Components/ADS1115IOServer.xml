@@ -1,17 +1,18 @@
 <Component Model='I2CIO.ADS1115IOServer' Name='ADS1115IOServer' src='Components/ADS1115IOServer.xml'  Description='Communicate with ADS1115 analog-to-digital converter over I2C bus'>
-  <EnableA3>0</EnableA3>
+  <Priority>high</Priority>
+  <EnableA3>1</EnableA3>
   <EnableA2>1</EnableA2>
   <EnableA1>1</EnableA1>
-  <EnableA0>1</EnableA0>
+  <EnableA0>0</EnableA0>
   <EnableA2A3>0</EnableA2A3>
   <EnableA1A3>0</EnableA1A3>
   <EnableA0A3>0</EnableA0A3>
   <EnableA0A1>0</EnableA0A1>
-  <DataRate>250SPS</DataRate>
+  <DataRate>475SPS</DataRate>
   <Gain>±2.048V</Gain>
   <Debug>0</Debug>
   <Adapter>/dev/i2c-1</Adapter>
-  <fs>100</fs>
+  <fs>200</fs>
 
   <Signals>
     <Signal Description='Process run time each s.' Input='0' Model='CDPSignal&lt;double&gt;' Name='Process Timer' Type='double' Unit='s/s'></Signal>

@@ -7,6 +7,7 @@
 using namespace MoverDemoLib;
 
 const double TRANSITION_TO_DRIVE_TIMEOUT_SEC = 3.0;
+const double SMOOTH_DRIVE_SPEED = 10.0;
 
 Controller::Controller()
 {
@@ -19,6 +20,10 @@ Controller::~Controller()
 void Controller::Create(const char* fullName)
 {
   CDPComponent::Create(fullName);
+  SmoothDrive.Create("SmoothDrive",this,CDPPropertyBase::e_Element,(CDPOBJECT_SETPROPERTY_HANDLER)nullptr,(CDPOBJECT_VALIDATEPROPERTY_HANDLER)nullptr);
+  MotorsOn.Create("MotorsOn",this,CDPPropertyBase::e_Element,(CDPOBJECT_SETPROPERTY_HANDLER)nullptr,(CDPOBJECT_VALIDATEPROPERTY_HANDLER)nullptr);
+  PowerButtonPressed.Create("PowerButtonPressed",this);
+  LightButtonPressed.Create("LightButtonPressed",this);
   DistanceFromWall.Create("DistanceFromWall",this,CDPPropertyBase::e_Element);
   DriveStraightSpeed.Create("DriveStraightSpeed",this,CDPPropertyBase::e_Element);
   TurnSpeed.Create("TurnSpeed",this,CDPPropertyBase::e_Element);
@@ -61,6 +66,19 @@ void Controller::CreateModel()
 void Controller::Configure(const char* componentXML)
 {
   CDPComponent::Configure(componentXML);
+
+  SmoothDrive.SetPropertyChangeHandler([&] (CDPPropertyBase*) {
+      if (SmoothDrive)
+          BaseSpeed = SMOOTH_DRIVE_SPEED;
+  });
+  PowerButtonPressed.GetPropertyObject("Value")->SetPropertyChangeHandler([&] (CDPPropertyBase*) {
+      if (PowerButtonPressed)
+          MotorsOn = !MotorsOn;
+  });
+  LightButtonPressed.GetPropertyObject("Value")->SetPropertyChangeHandler([&] (CDPPropertyBase*) {
+      if (LightButtonPressed)
+          SmoothDrive = !SmoothDrive;
+  });
 }
 
 void Controller::Activate()
@@ -133,17 +151,20 @@ bool Controller::TransitionToTurn()
 
 bool Controller::TransitionToFollowRightWall()
 {
-  return !CanSeeFrontWall() && !CanSeeLeftWall() && CanSeeRightWall();
+  return !CanSeeFrontWall() && CanSeeRightWall() && SensorRight >= SensorLeft;
 }
 
 bool Controller::TransitionToFollowLeftWall()
 {
-  return !CanSeeFrontWall() && CanSeeLeftWall();
+  return !CanSeeFrontWall() && CanSeeLeftWall() && SensorLeft > SensorRight;
 }
 
 bool Controller::CanSeeFrontWall()
 {
-  return SensorFront > SensorFrontWallThreshold;
+  if (SmoothDrive)
+    return SensorFront > SensorFrontWallThreshold && SensorFront > std::max(SensorLeft, SensorRight);
+  else
+    return SensorFront > SensorFrontWallThreshold;
 }
 
 bool Controller::CanSeeLeftWall()

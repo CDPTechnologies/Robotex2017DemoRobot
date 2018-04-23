@@ -49,11 +49,22 @@ Usage:
   </div>
 
   <br><br>
-  <cdp-input type="range" min="0" max="100" routing="MoverDemoApp.Controller.BaseSpeed"></cdp-input>
+  <cdp-input type="range" min="0" max="40" routing="MoverDemoApp.Controller.BaseSpeed" style="width: 200px"></cdp-input>
 
   <br><br>
 
-  <cdp-button routing="MoverDemoApp.GPIOServer.PowerButton" class="ui button primary">On/Off</cdp-button>
+  <div class="ui toggle checkbox">
+    <cdp-input type="checkbox" routing="MoverDemoApp.Controller.SmoothDrive"></cdp-input>
+    <label>Smooth drive</label>
+  </div>
+  <br><br>
+
+  <div class="ui toggle checkbox">
+    <cdp-input type="checkbox" routing="MoverDemoApp.Controller.MotorsOn"></cdp-input>
+    <label>Power</label>
+  </div>
+  <br><br>
+
   <cdp-button routing="MoverDemoApp.CM_SUSPEND" class="ui button negative">Kill</cdp-button>
 
 </div>

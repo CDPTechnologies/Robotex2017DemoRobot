@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="iso-8859-1"?>
 
 <Application Name="MoverDemoApp" Model="Application" Description='This is a template for creating CDP controller applications.'>
+  <Domain>MoverDemo</Domain>
   <ApplicationHandle>1</ApplicationHandle>
   <fs>100</fs>
   <ClockSync>None</ClockSync>
   <IsTimeServer>0</IsTimeServer>
   <OStimeInterval>120</OStimeInterval>
 
-  <NetworkInterface Name="ETH0" MAC="" IPAddress="192.168.0.77" SubnetMask="255.255.255.0"></NetworkInterface>
+  <NetworkInterface Name="ETH0" MAC="" IPAddress="10.221.232.129" SubnetMask="255.255.255.0"></NetworkInterface>
 
   <CDPMessages>
     <TimestampLocal>1</TimestampLocal>
@@ -33,7 +34,7 @@
       <Operator Description='The ScalingOperator scales from one range and type to another range and type.' Model='Automation.ScalingOperator&lt;double&gt;' Name='ScalingOperator' Type='double'>
         <ScalingPoint InValue='0' Model='Automation.ScalingPoint&lt;double&gt;' Name='ScalingPoint' OutValue='0' Type='double'  InValueRouting=''  OutValueRouting=''></ScalingPoint>
         <ScalingPoint InValue='32768' Model='Automation.ScalingPoint&lt;double&gt;' Name='ScalingPoint1' OutValue='100' Type='double'  InValueRouting=''  OutValueRouting=''></ScalingPoint></Operator></Signal>
-    <Signal Input='0' Model='CDPSignal&lt;double&gt;' Name='SensorLeft' Type='double'  Description='Proximity to wall (between 0 and 100)'  DisableOperators='0'  InternalValue='0'  RoutedProperties='Value'  Routing='.ADS1115IOServer.A0'  RoutingStatus=''  Status='0'  Unit='%'  Value='0'>
+    <Signal Input='0' Model='CDPSignal&lt;double&gt;' Name='SensorLeft' Type='double'  Description='Proximity to wall (between 0 and 100)'  DisableOperators='0'  InternalValue='0'  RoutedProperties='Value'  Routing='.ADS1115IOServer.A3'  RoutingStatus=''  Status='0'  Unit='%'  Value='0'>
       <Operator Description='The ScalingOperator scales from one range and type to another range and type.' Model='Automation.ScalingOperator&lt;double&gt;' Name='ScalingOperator' Type='double'>
         <ScalingPoint InValue='0' Model='Automation.ScalingPoint&lt;double&gt;' Name='ScalingPoint' OutValue='0' Type='double'  InValueRouting=''  OutValueRouting=''></ScalingPoint>
         <ScalingPoint InValue='32768' Model='Automation.ScalingPoint&lt;double&gt;' Name='ScalingPoint1' OutValue='100' Type='double'  InValueRouting=''  OutValueRouting=''></ScalingPoint></Operator></Signal>
@@ -47,6 +48,12 @@
       <Operator Description='Limit (truncate) signal output values' Model='Automation.MinMaxLimiter&lt;double&gt;' Name='MinMaxLimiter' Type='double'>
         <Argument Description='Minimum value to limit output to. Values below that will be replaced with Min value in output.' Model='Argument&lt;double&gt;' Name='Min' Type='double' Value='0'></Argument>
         <Argument Description='Maximum value to limit output to. Values above that will be replaced with Max value in output.' Model='Argument&lt;double&gt;' Name='Max' Type='double' Value='100'></Argument></Operator></Signal>
+    <Signal Input="0" Model="CDPSignal&lt;double&gt;" Name="MotorLeftMovingAvg" Type="double"  Value='0'  Routing='.GPIOServer.MotorLeftPWM'>
+      <Operator AverageType="Simple" Description="Average value based on signal history values" Model="Automation.MovingAverage&lt;double&gt;" Name="MovingAverage" Type="double"  Value='0'>
+        <Argument Description="Time in seconds to take values into account while calculation average" Model="Argument&lt;double&gt;" Name="HistoryWindowTime" Type="double" Value="0.2000000000000000111"></Argument></Operator></Signal>
+    <Signal Input="0" Model="CDPSignal&lt;double&gt;" Name="MotorRightMovingAvg" Type="double"  Value='0'  Routing='.GPIOServer.MotorRightPWM'>
+      <Operator AverageType="Simple" Description="Average value based on signal history values" Model="Automation.MovingAverage&lt;double&gt;" Name="MovingAverage" Type="double"  Value='0'>
+        <Argument Description="Time in seconds to take values into account while calculation average" Model="Argument&lt;double&gt;" Name="HistoryWindowTime" Type="double" Value="0.2000000000000000111"></Argument></Operator></Signal>
   </Signals>
 
   <Alarms>

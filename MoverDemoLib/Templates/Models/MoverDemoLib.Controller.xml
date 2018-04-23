@@ -5,17 +5,19 @@
  <Priority>normal</Priority>
  <fs>5</fs>
  <Attributes>
-  <Attribute Type="string" Name="Description" Value="Simple component"/>
-  <Attribute SaveOnChange="0" Type="string" Name="Model" Description="Implementation model used." ReadOnly="1" Required="1" Value="MoverDemoLib.Controller"/>
+  <Attribute Name="Description" Value="Simple component" Type="string"/>
+  <Attribute Description="Implementation model used." Required="1" ReadOnly="1" Name="Model" Value="MoverDemoLib.Controller" SaveOnChange="0" Type="string"/>
  </Attributes>
  <Signals>
-  <Signal Description="Speed of left motor (between 0 and 100)" Type="double" Input="0" Name="MotorLeft" Model="CDPSignal&lt;double&gt;"/>
-  <Signal Description="Speed of right motor (between 0 and 100)" Type="double" Input="0" Name="MotorRight" Model="CDPSignal&lt;double&gt;"/>
-  <Signal Description="Proximity to wall (between 0 and 100)" Type="double" Input="1" Name="SensorFront" Model="CDPSignal&lt;double&gt;"/>
-  <Signal Description="Proximity to wall (between 0 and 100)" Type="double" Input="1" Name="SensorLeft" Model="CDPSignal&lt;double&gt;"/>
-  <Signal Description="Proximity to wall (between 0 and 100)" Type="double" Input="1" Name="SensorRight" Model="CDPSignal&lt;double&gt;"/>
-  <Signal Description="PID regulator used to follow left wall" Type="double" Model="CDPSignal&lt;double&gt;" Value="" Name="PIDLeft" Input="1" Unit=""/>
-  <Signal Description="PID regulator used to follow right wall" Type="double" Model="CDPSignal&lt;double&gt;" Value="" Name="PIDRight" Input="1" Unit=""/>
+  <Signal Description="Speed of left motor (between 0 and 100)" Input="0" Name="MotorLeft" Type="double" Model="CDPSignal&lt;double&gt;"/>
+  <Signal Description="Speed of right motor (between 0 and 100)" Input="0" Name="MotorRight" Type="double" Model="CDPSignal&lt;double&gt;"/>
+  <Signal Description="Proximity to wall (between 0 and 100)" Input="1" Name="SensorFront" Type="double" Model="CDPSignal&lt;double&gt;"/>
+  <Signal Description="Proximity to wall (between 0 and 100)" Input="1" Name="SensorLeft" Type="double" Model="CDPSignal&lt;double&gt;"/>
+  <Signal Description="Proximity to wall (between 0 and 100)" Input="1" Name="SensorRight" Type="double" Model="CDPSignal&lt;double&gt;"/>
+  <Signal Description="PID regulator used to follow left wall" Input="1" Unit="" Name="PIDLeft" Value="" Type="double" Model="CDPSignal&lt;double&gt;"/>
+  <Signal Description="PID regulator used to follow right wall" Input="1" Unit="" Name="PIDRight" Value="" Type="double" Model="CDPSignal&lt;double&gt;"/>
+  <Signal Description="Whether robot power button is currently pressed down" Input="1" Unit="" Name="PowerButtonPressed" Value="" Model="CDPSignal&lt;bool&gt;" Type="bool"/>
+  <Signal Description="Whether robot light button is currently pressed down" Input="1" Unit="" Name="LightButtonPressed" Value="" Model="CDPSignal&lt;bool&gt;" Type="bool"/>
  </Signals>
  <States>
   <State Description="Use left sensor to follow wall" Name="FollowLeftWall"/>
@@ -24,25 +26,27 @@
   <State Description="Turn until front sensor can't see any walls" Name="Turn"/>
  </States>
  <StateTransitions>
-  <StateTransition ToState="FollowLeftWall" Name="DriveToFollowLeftWall" FromState="Drive"/>
-  <StateTransition ToState="Turn" Name="DriveToTurn" FromState="Drive"/>
-  <StateTransition ToState="FollowRightWall" Name="DriveToFollowRightWall" FromState="Drive"/>
-  <StateTransition ToState="Drive" Name="NullToDrive" FromState="Null"/>
-  <StateTransition ToState="Drive" Name="TurnToDrive" FromState="Turn"/>
-  <StateTransition ToState="FollowLeftWall" Name="TurnToFollowLeftWall" FromState="Turn"/>
-  <StateTransition ToState="FollowRightWall" Name="TurnToFollowRightWall" FromState="Turn"/>
-  <StateTransition ToState="Drive" Name="FollowRightWallToDrive" FromState="FollowRightWall"/>
+  <StateTransition FromState="Drive" ToState="FollowLeftWall" Name="DriveToFollowLeftWall"/>
+  <StateTransition FromState="Drive" ToState="Turn" Name="DriveToTurn"/>
+  <StateTransition FromState="Drive" ToState="FollowRightWall" Name="DriveToFollowRightWall"/>
+  <StateTransition FromState="Null" ToState="Drive" Name="NullToDrive"/>
+  <StateTransition FromState="Turn" ToState="Drive" Name="TurnToDrive"/>
+  <StateTransition FromState="Turn" ToState="FollowLeftWall" Name="TurnToFollowLeftWall"/>
+  <StateTransition FromState="Turn" ToState="FollowRightWall" Name="TurnToFollowRightWall"/>
+  <StateTransition FromState="FollowRightWall" ToState="Drive" Name="FollowRightWallToDrive"/>
   <!--<StateTransition ToState="FollowLeftWall" FromState="FollowRightWall" Name="FollowRightWallToFollowLeftWall"/>-->
-  <StateTransition ToState="Turn" Name="FollowRightWallToTurn" FromState="FollowRightWall"/>
-  <StateTransition ToState="Drive" Name="FollowLeftWallToDrive" FromState="FollowLeftWall"/>
+  <StateTransition FromState="FollowRightWall" ToState="Turn" Name="FollowRightWallToTurn"/>
+  <StateTransition FromState="FollowLeftWall" ToState="Drive" Name="FollowLeftWallToDrive"/>
   <!--<StateTransition ToState="FollowRightWall" FromState="FollowLeftWall" Name="FollowLeftWallToFollowRightWall"/>-->
-  <StateTransition ToState="Turn" Name="FollowLeftWallToTurn" FromState="FollowLeftWall"/>
+  <StateTransition FromState="FollowLeftWall" ToState="Turn" Name="FollowLeftWallToTurn"/>
  </StateTransitions>
- <Element Description="Base speed when following a wall" SaveOnChange="1" Type="double" LogEventOnChange="1" RouteMethod="RouteEvent" Name="BaseSpeed" Value="40"/>
- <Element Description="Preferred side sensor value (distance) when following a wall." SaveOnChange="1" Type="double" LogEventOnChange="1" RouteMethod="RouteEvent" Name="DistanceFromWall" Value="20"/>
- <Element Description="Motor speed when in Drive state" SaveOnChange="1" Type="double" LogEventOnChange="1" RouteMethod="RouteEvent" Name="DriveStraightSpeed" Value="10"/>
- <Element Description="Minimum front sensor value before wall is detected and robot switches to Turn state" SaveOnChange="1" Type="double" LogEventOnChange="1" RouteMethod="RouteEvent" Name="SensorFrontWallThreshold" Value="15"/>
- <Element Description="Minimum left sensor value before wall is detected" SaveOnChange="1" Type="double" LogEventOnChange="1" RouteMethod="RouteEvent" Name="SensorLeftWallThreshold" Value="15"/>
- <Element Description="Minimum right sensor value before wall is detected" SaveOnChange="1" Type="double" LogEventOnChange="1" RouteMethod="RouteEvent" Name="SensorRightWallThreshold" Value="15"/>
- <Element Description="Motor speed while in Turn state" SaveOnChange="1" Type="double" LogEventOnChange="1" RouteMethod="RouteEvent" Name="TurnSpeed" Value="20"/>
+ <Element Description="Base speed when following a wall" RouteMethod="RouteEvent" Name="BaseSpeed" Value="40" LogEventOnChange="1" SaveOnChange="1" Type="double"/>
+ <Element Description="Preferred side sensor value (distance) when following a wall." RouteMethod="RouteEvent" Name="DistanceFromWall" Value="20" LogEventOnChange="1" SaveOnChange="1" Type="double"/>
+ <Element Description="Motor speed when in Drive state" RouteMethod="RouteEvent" Name="DriveStraightSpeed" Value="10" LogEventOnChange="1" SaveOnChange="1" Type="double"/>
+ <Element Description="Minimum front sensor value before wall is detected and robot switches to Turn state" RouteMethod="RouteEvent" Name="SensorFrontWallThreshold" Value="15" LogEventOnChange="1" SaveOnChange="1" Type="double"/>
+ <Element Description="Minimum left sensor value before wall is detected" RouteMethod="RouteEvent" Name="SensorLeftWallThreshold" Value="15" LogEventOnChange="1" SaveOnChange="1" Type="double"/>
+ <Element Description="Minimum right sensor value before wall is detected" RouteMethod="RouteEvent" Name="SensorRightWallThreshold" Value="15" LogEventOnChange="1" SaveOnChange="1" Type="double"/>
+ <Element Description="Motor speed while in Turn state" RouteMethod="RouteEvent" Name="TurnSpeed" Value="20" LogEventOnChange="1" SaveOnChange="1" Type="double"/>
+ <Element Description="When enabled, follows wall using side sensor even if front sensor sees an obstacle. This makes driving smoother." RouteMethod="RouteEvent" Name="SmoothDrive" LogEventOnChange="0" SaveOnChange="0" Type="bool"/>
+ <Element Description="Motors off/on switch" RouteMethod="RouteEvent" Name="MotorsOn" LogEventOnChange="0" SaveOnChange="0" Type="bool"/>
 </Model>

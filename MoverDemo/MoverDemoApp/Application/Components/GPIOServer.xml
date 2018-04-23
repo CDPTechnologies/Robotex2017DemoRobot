@@ -1,4 +1,5 @@
 <Component Model='GPIOPinIO.GPIOServer' Name='GPIOServer' src='Components/GPIOServer.xml'  Description='Implementation of GPIOServer to read/write IO pins via signals'>
+  <Priority>normal</Priority>
   <fs>1000</fs>
 
   <Signals>
@@ -13,11 +14,13 @@
     a message into a pulsing signal. Its main use is to allow the control of the power supplied to electrical devices,
     such as motors. Input is a number between MinInput and MaxInput properties. Output is a pulsing bool signal." MaxInput="100" MinInput="0" Model="Automation.PWMOperator" Name="PWMOperator" PWMResolution="20" Type="double"></Operator></Signal>
     <Signal Input='0' Model='CDPSignal&lt;double&gt;' Name='MotorRightPWM' Type='double'  Routing='MoverDemoApp.Controller.MotorRight'  Description='Converts motor speed to pulse width modulated bool signal'>
+      <Operator Description="The ScalingOperator scales from one range and type to another range and type." Model="Automation.ScalingOperator&lt;double&gt;" Name="ScalingOperator" Type="double">
+        <ScalingPoint InValue="0" Model="Automation.ScalingPoint&lt;double&gt;" Name="ScalingPoint" OutValue="0" Type="double"></ScalingPoint>
+        <ScalingPoint InValue="50" Model="Automation.ScalingPoint&lt;double&gt;" Name="ScalingPoint1" OutValue="100" Type="double"></ScalingPoint>
+        <ScalingPoint InValue="100" Model="Automation.ScalingPoint&lt;double&gt;" Name="ScalingPoint2" OutValue="100" Type="double"></ScalingPoint></Operator>
       <Operator Description="Pulse-width modulation (PWM) is a modulation technique used to encode
     a message into a pulsing signal. Its main use is to allow the control of the power supplied to electrical devices,
     such as motors. Input is a number between MinInput and MaxInput properties. Output is a pulsing bool signal." MaxInput="100" MinInput="0" Model="Automation.PWMOperator" Name="PWMOperator" PWMResolution="20" Type="double"></Operator></Signal>
-    <Signal Input='0' Model='CDPSignal&lt;bool&gt;' Name='IsOn' Type='bool'  Description='Are motors enabled'  InternalValue='0'  RoutedProperties='Value'  Routing='.PowerButton'  RoutingStatus=''  Status='0'  Unit=''  Value='0'>
-      <Operator Description='Toggles signal value between true/false on the edge of the input signal.' Edge='RisingEdge' Model='Automation.ToggleOperator' Name='ToggleOperator' Type='bool'></Operator></Signal>
   </Signals>
 
   <Alarms>
@@ -28,11 +31,17 @@
   <GPIOPins>
     <GPIOPin Input='1' Model='GPIOPinIO.GPIOPin' Name='MotorLeft' Nr='8' Type='bool' Value='0'  Description='Controls left motor'  InternalValue='0'  NetworkConvert='0'  RoutedProperties='Value'  Routing='.MotorLeftPWM'  RoutingStatus=''  Status='0'  Unit=''>
       <Operator Description='Multiply signal with arguments operator' Model='Automation.MulOperator&lt;bool&gt;' Name='MulOperator' Type='bool'>
-        <Argument Description='Multiplier' Model='Argument&lt;bool&gt;' Name='Argument' Type='bool' Value='0'  Routing='MoverDemoApp.GPIOServer.IsOn'></Argument></Operator></GPIOPin>
+        <Argument Description='Multiplier' Model='Argument&lt;bool&gt;' Name='Argument' Type='bool' Value='0'  Routing='MoverDemoApp.Controller.MotorsOn'></Argument></Operator></GPIOPin>
     <GPIOPin Input='1' Model='GPIOPinIO.GPIOPin' Name='MotorRight' Nr='7' Type='bool' Value='0'  Routing='.MotorRightPWM'  Description='Controls right motor'>
       <Operator Description='Multiply signal with arguments operator' Model='Automation.MulOperator&lt;bool&gt;' Name='MulOperator' Type='bool'>
-        <Argument Description='Multiplier' Model='Argument&lt;bool&gt;' Name='Argument' Type='bool' Value='0'  Routing='MoverDemoApp.GPIOServer.IsOn'></Argument></Operator></GPIOPin>
-    <GPIOPin Input='0' Model='GPIOPinIO.GPIOPin' Name='PowerButton' Nr='9' Type='bool' Value='0'  Description='Button to enable motors'  InternalValue='0'  NetworkConvert='0'  RoutedProperties='Value'  Routing=''  RoutingStatus=''  Status='0'  Unit=''></GPIOPin>
-    <GPIOPin Input='0' Model='GPIOPinIO.GPIOPin' Name='LightButton' Nr='10' Type='bool' Value='0'  Description=''  InternalValue='0'  NetworkConvert='0'  RoutedProperties='Value'  Routing=''  RoutingStatus=''  Status='0'  Unit=''></GPIOPin>
+        <Argument Description='Multiplier' Model='Argument&lt;bool&gt;' Name='Argument' Type='bool' Value='0'  Routing='MoverDemoApp.Controller.MotorsOn'></Argument></Operator></GPIOPin>
+    <GPIOPin Input='0' Model='GPIOPinIO.GPIOPin' Name='PowerButton' Nr='9' Type='bool' Value='0'  Description='Button to enable motors'  InternalValue='0'  NetworkConvert='0'  RoutedProperties='Value'  Routing=''  RoutingStatus=''  Status='0'  Unit=''>
+      <Operator AverageType="Simple" Description="Average value based on signal history values" Model="Automation.MovingAverage&lt;double&gt;" Name="MovingAverage" Type="double">
+        <Argument Description="Time in seconds to take values into account while calculation average" Model="Argument&lt;double&gt;" Name="HistoryWindowTime" Type="double" Value="0.050000000000000002776"></Argument></Operator>
+      <Operator Description="Mathematical expression evaluation operator" Expression="Input &gt;= 1" Model="Automation.Evaluate&lt;double&gt;" Name="Evaluate" Type="double"></Operator></GPIOPin>
+    <GPIOPin Input='0' Model='GPIOPinIO.GPIOPin' Name='LightButton' Nr='10' Type='bool' Value='0'  Description=''  InternalValue='0'  NetworkConvert='0'  RoutedProperties='Value'  Routing=''  RoutingStatus=''  Status='0'  Unit=''>
+      <Operator AverageType="Simple" Description="Average value based on signal history values" Model="Automation.MovingAverage&lt;double&gt;" Name="MovingAverage" Type="double"  Value='0'>
+        <Argument Description="Time in seconds to take values into account while calculation average" Model="Argument&lt;double&gt;" Name="HistoryWindowTime" Type="double" Value="0.050000000000000002776"></Argument></Operator>
+      <Operator Description="Mathematical expression evaluation operator" Expression="Input &gt;= 1" Model="Automation.Evaluate&lt;double&gt;" Name="Evaluate" Type="double"  Value='0'></Operator></GPIOPin>
   </GPIOPins>
 </Component>
